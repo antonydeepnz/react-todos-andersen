@@ -8,20 +8,33 @@ export default class Todo extends Component {
       checked: false
     }
     this.deleteItem = this.deleteItem.bind(this);
+    this.markComplete = this.markComplete.bind(this);
+    this.classNameChange = this.classNameChange.bind(this);
+    this.getCheckedState = this.getCheckedState.bind(this);
   }
 
   deleteItem = (event) => {
-    console.log('delete');
+    event.target.parentNode.style.display = 'none';
   }
 
-  generateID = function () {
-    return 'id-' + Math.random().toString(36).substr(2, 9);
-  };
+  classNameChange = (normal, changed) => {
+    return !this.state.checked? normal: changed;
+  } 
+
+  markComplete = () => {
+    this.setState({checked: !this.state.checked});
+  }
+
+  getCheckedState = () => {
+
+  }
 
   render(){
     return(
-      <li className="todo-item">
-        <Text text={this.props.text} />
+      <li className={this.classNameChange('todo-item', 'todo-item todo-item-complete')}
+          onClick={this.markComplete}>
+        <Text className={this.classNameChange('todo-item-text', 'todo-item-text-complete') }
+              text={this.props.text} />
         <Date date={this.props.date} />
         <Delete click={this.deleteItem} />
       </li>
@@ -38,5 +51,5 @@ const Text = (props) => {
 } 
 
 const Delete = (props) => {
-  return <span className="todo-item-delete" onClick={props.click}>X</span>
+  return <span className="todo-item-delete" onClick={props.click}>&#x2716</span>
 }
