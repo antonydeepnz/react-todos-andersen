@@ -15,13 +15,14 @@ export default class Filter extends Component {
 
   queryChange = type => ({target: {value}}) => {
     this.setState({[type]: value});
-    console.log(this.state);
+    //console.log(this.state);
   }
 
   render(){
     return(
       <div className="filter-container">
-        <h4>Apply filter</h4>       
+        <h4>Apply filter</h4>  
+        <span className='separator'></span>     
         <div>
           <Input className={'filter-item'}
                label={'Input text to search for'}
