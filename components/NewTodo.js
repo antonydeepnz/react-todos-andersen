@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/filter'
+import Input from './Input'
 
 export default class NewTodo extends Component {
   constructor(){
@@ -14,11 +15,11 @@ export default class NewTodo extends Component {
     return(
       <div>
         <div>
-          <Input label={'Input text of new '} />
-          <div className=''>
-            <label>Input text to search for</label>
-            <input type='text' onChange={}/>
-          </div>
+          <Input className={''} 
+              label={'Input text of new todo'} />
+          <Input className={''} 
+              label={'Select date'}
+              type={'date'}/>
         </div>
         <div>
 
@@ -26,13 +27,4 @@ export default class NewTodo extends Component {
       </div>
     );
   }
-}
-
-const Input = (props) => {
-  return (
-    <div className=''>
-      <label>{props.label}</label>
-      <input type={props.type} onChange={}/>
-    </div>
-  );
 }

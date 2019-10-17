@@ -4,6 +4,7 @@ import './style.css';
 import defaultData from './defaultData'
 import Todo from './components/Todo'
 import Filter from './components/Filter'
+import NewTodo from './components/NewTodo'
 
   const generateID = function () {
     return 'id-' + Math.random().toString(36).substr(2, 9);
@@ -30,6 +31,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <NewTodo />
         <Filter />
         <div className='todos-list'>
           {this.state.todos.map((item) => {

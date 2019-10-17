@@ -26,7 +26,6 @@ export default class Filter extends Component {
         <div>
           <Input className={'filter-item'}
                label={'Input text to search for'}
-               type={'text'}
                change={this.queryChange('text')}/>
           <Input className={'filter-item'}
                label={'Select date search from'}
