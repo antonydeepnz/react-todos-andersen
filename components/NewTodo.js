@@ -9,12 +9,7 @@ export default class NewTodo extends Component {
       text: '',
       date: ''
     }
-    this.submit = this.submit.bind(this);
     this.onChange = this.onChange.bind(this);
-  }
-
-  submit = () => {
-    console.log(`${this.state.text} + ${this.state.date}`);
   }
 
   onChange = type => ({target: {value}}) => {
