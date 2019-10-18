@@ -19,6 +19,7 @@ export default class Todo extends Component {
 
   deleteItem = (event) => {
     event.target.parentNode.style.display = 'none';
+    
   }
 
   classNameChange = (normal, changed) => {
@@ -29,19 +30,20 @@ export default class Todo extends Component {
     this.setState({checked: !this.state.checked});
   }
 
-  getCheckedState = () => {
-
+  getCheckedState = (event) => {
+    //console.log(event.target.getAttribute('data-key'));
   }
 
   render(){
     return(
       <li className={this.classNameChange('todo-item', 'todo-item todo-item-complete')}
-          onClick={this.markComplete}>
+          onClick={this.markComplete}
+          onMouseEnter={this.getCheckedState.bind(this)}>
         <div className='todo-text-wrapper'>
           <Text text={this.props.text} />
           <Date date={this.props.date} />
         </div>
-        <Delete click={this.deleteItem} />
+        <Delete click={this.props.deleteItem} />
       </li>
     );
   }

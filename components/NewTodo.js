@@ -16,6 +16,12 @@ export default class NewTodo extends Component {
     this.setState({[type]: value});
   }
 
+  add = () => {
+    this.props.addTodo(this.state);
+    const inputs = document.querySelectorAll('Input');
+    inputs.forEach(item => item.value = '')
+  }
+
   render(){
     return(
       <div>
@@ -28,7 +34,7 @@ export default class NewTodo extends Component {
               type='date' 
               change={this.onChange('date')} />
         </div>
-        <button onClick={() => {this.props.addTodo(this.state)}}>Add todo</button>
+        <button onClick={this.add.bind(this)}>Add todo</button>
         <div>
 
         </div>

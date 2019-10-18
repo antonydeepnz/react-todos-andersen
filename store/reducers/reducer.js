@@ -1,11 +1,8 @@
-export default function t(state=['dfdsfdf','dsfdsfdsf','dsfsdfsdf'],action){
-  switch (action.type){
-    case "ADD_TODO": {
-      return [
-        ...state,
-        action.payload
-      ]
-    }
-  }
-  return state
-}
+import { combineReducers } from 'redux'
+
+import todos from './todos'
+import another from './another'
+
+export default combineReducers({
+  todos, another
+})

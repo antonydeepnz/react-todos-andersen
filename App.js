@@ -5,27 +5,29 @@ import Todo from './components/Todo'
 import Filter from './components/Filter'
 import NewTodo from './components/NewTodo'
 
+import { connect } from 'react-redux'
+
 const generateID = function () {
   return 'id-' + Math.random().toString(36).substr(2, 9);
 };
 
-export default class App extends Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
       todos: [],
       filteredTodos: []
     };
-    this.addTodo = this.addTodo.bind(this);
-    this.getDataFromLS = this.getDataFromLS.bind(this);
-    this.setDataToLS = this.setDataToLS.bind(this);
+    //this.addTodo = this.addTodo.bind(this);
+    //this.getDataFromLS = this.getDataFromLS.bind(this);
+    //this.setDataToLS = this.setDataToLS.bind(this);
   }
 
   componentDidMount(){
     //this.setState({todos: defaultData});
-    this.getDataFromLS();
+   // this.getDataFromLS();
   }
-
+/*
   addTodo = (value) => {
     const item = {key: generateID(), text:value.text, date: value.date, isComplete: false}
     this.setState(prevState => ({todos: [...prevState.todos,item]}));
@@ -33,7 +35,12 @@ export default class App extends Component {
     this.setDataToLS();
     console.log(localStorage);
   }
-
+*/
+  addTodo = (value) => {
+    const item = {key: generateID(), text: value.text, date: value.date, isComplete: false};
+    this.props.onAddTodo(value);
+  }
+/*
   getDataFromLS = () => {
     const data = JSON.parse(localStorage.getItem('react-todo'));
     this.setState({todos: [...data]});
@@ -42,27 +49,43 @@ export default class App extends Component {
   setDataToLS = () => {
     localStorage.setItem('react-todo', JSON.stringify(this.state.todos));
   }
-
+*/
   deleteTodo = (event) => {
-    event.target.style.display = 'none';
-
+    event.target.parentNode.style.display = 'none';
+    this.props.onDeleteTodo('dsfdsfdf');
   }
 
   render() {
-    //console.log(store.getState())
+    console.log(this.props.another)
     return (
       <div>
-        <NewTodo addTodo={this.addTodo}/>
+        <NewTodo addTodo={this.addTodo.bind(this)}/>
         <Filter />
-        <div className='todos-list'>
-          {this.state.todos.map((item) => {
+        <ul className='todos-list'>
+          {this.props.todos.map((item) => {
             return <Todo key={item.key}
                       text={item.text}
                       date={item.date}
-                      checked={item.isComplete} /> 
+                      checked={item.isComplete}
+                      deleteItem={this.deleteTodo.bind(this)} /> 
           })}
-        </div>
+        </ul>
       </div>
     );
   }
 }
+
+export default connect(
+  state => ({
+    todos: state.todos,
+    another: state.another
+  }),
+  dispatch => ({
+    onAddTodo: (todo) => {
+      dispatch({type: 'ADD_TODO', payload: todo})
+    },
+    onDeleteTodo: (val) => {
+      dispatch({type: 'DELETE_TODO', payload: val})
+    }
+  })
+)(App)
