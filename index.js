@@ -24,21 +24,25 @@ class App extends Component {
 
   componentDidMount(){
     this.setState({todos: defaultData});
+    this.getDataFromLS();
   }
 
   addTodo = (value) => {
     const item = {key: generateID(), text:value.text, date: value.date, isComplete: false}
     this.setState({todos: this.state.todos.concat(item)});
+    this.setDataToLS();
   }
 
   getDataFromLS = () => {
     for(let item of JSON.parse(localStorage.getItem('react-todo'))){
-      //todoItemsArray.push(item);
+      this.setState({todos: this.state.todos.concat(item)});
+      console.log(item);
     }
   }
 
   setDataToLS = () => {
-    localStorage.setItem('react-todo', JSON.stringify(this.state));
+    localStorage.setItem('react-todo', JSON.stringify(this.state.todos));
+    console.log(localStorage);
   }
 
   render() {

@@ -13,6 +13,10 @@ export default class Todo extends Component {
     this.getCheckedState = this.getCheckedState.bind(this);
   }
 
+  componentDidMount(){
+    this.setState({checked: this.props.checked})
+  }
+
   deleteItem = (event) => {
     event.target.parentNode.style.display = 'none';
   }
