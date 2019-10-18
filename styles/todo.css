@@ -19,6 +19,7 @@
 
 .todo-item-complete {
   background-color: #6b6565;
+  text-decoration: line-through;
 }
 
 .todo-item:hover {
@@ -29,29 +30,16 @@
   background: #549c54;
 }
 
-.todo-item-text {
+.todo-text-wrapper {
   display: flex;
   flex-direction: row;
   position: relative;
   width: 80%;
   justify-content: space-between;
-  text-decoration: none;
-}
-
-.todo-item-text-complete {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  width: 80%;
-  justify-content: space-between;
-  text-decoration: line-through;
-}
-
-.todo-item-date {
-
 }
 
 .todo-item-delete {
+  content: "&#x2716";
   position: absolute;
   right: 0;
   top: 0;

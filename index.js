@@ -23,26 +23,30 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.setState({todos: defaultData});
+    //this.setState({todos: defaultData});
     this.getDataFromLS();
   }
 
   addTodo = (value) => {
     const item = {key: generateID(), text:value.text, date: value.date, isComplete: false}
-    this.setState({todos: this.state.todos.concat(item)});
+    this.setState(prevState => ({todos: [...prevState.todos,item]}));
+    console.log(this.state.todos);
     this.setDataToLS();
+    console.log(localStorage);
   }
 
   getDataFromLS = () => {
-    for(let item of JSON.parse(localStorage.getItem('react-todo'))){
-      this.setState({todos: this.state.todos.concat(item)});
-      console.log(item);
-    }
+    const data = JSON.parse(localStorage.getItem('react-todo'));
+    this.setState({todos: [...data]});
   }
 
   setDataToLS = () => {
     localStorage.setItem('react-todo', JSON.stringify(this.state.todos));
-    console.log(localStorage);
+  }
+
+  deleteTodo = (event) => {
+    event.target.style.display = 'none';
+
   }
 
   render() {
@@ -54,7 +58,8 @@ class App extends Component {
           {this.state.todos.map((item) => {
             return <Todo key={item.key}
                       text={item.text}
-                      date={item.date} /> 
+                      date={item.date}
+                      checked={item.isComplete} /> 
           })}
         </div>
       </div>
@@ -63,3 +68,5 @@ class App extends Component {
 }
 
 render(<App />, document.getElementById('root'));
+
+

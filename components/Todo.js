@@ -37,23 +37,25 @@ export default class Todo extends Component {
     return(
       <li className={this.classNameChange('todo-item', 'todo-item todo-item-complete')}
           onClick={this.markComplete}>
-        <Text className={this.classNameChange('todo-item-text', 'todo-item-text-complete') }
-              text={this.props.text} />
-        <Date date={this.props.date} />
+        <div className='todo-text-wrapper'>
+          <Text text={this.props.text} />
+          <Date date={this.props.date} />
+        </div>
         <Delete click={this.deleteItem} />
       </li>
     );
   }
 }
 
-const Date = (props) => {
-  return <p className="todo-item-date">{props.date}</p>
-}
 
 const Text = (props) => {
   return <p className="todo-item-text">{props.text}</p>
 } 
 
+const Date = (props) => {
+  return <p className="todo-item-date">{props.date}</p>
+}
+
 const Delete = (props) => {
-  return <span className="todo-item-delete" onClick={props.click}>&#x2716</span>
+  return <span className="todo-item-delete" onClick={props.click}></span>
 }
