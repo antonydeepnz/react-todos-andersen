@@ -7,7 +7,7 @@ export default class Todo extends Component {
     this.state = {
       checked: false
     }
-    this.deleteItem = this.deleteItem.bind(this);
+    //this.deleteItem = this.deleteItem.bind(this);
     this.markComplete = this.markComplete.bind(this);
     this.classNameChange = this.classNameChange.bind(this);
     this.getCheckedState = this.getCheckedState.bind(this);
@@ -16,12 +16,12 @@ export default class Todo extends Component {
   componentDidMount(){
     this.setState({checked: this.props.checked})
   }
-
+/*
   deleteItem = (event) => {
     event.target.parentNode.style.display = 'none';
-    
-  }
 
+  }
+*/
   classNameChange = (normal, changed) => {
     return !this.state.checked? normal: changed;
   } 

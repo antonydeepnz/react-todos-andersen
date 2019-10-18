@@ -23,10 +23,6 @@ class App extends Component {
     //this.setDataToLS = this.setDataToLS.bind(this);
   }
 
-  componentDidMount(){
-    //this.setState({todos: defaultData});
-   // this.getDataFromLS();
-  }
 /*
   addTodo = (value) => {
     const item = {key: generateID(), text:value.text, date: value.date, isComplete: false}
@@ -86,6 +82,9 @@ export default connect(
     },
     onDeleteTodo: (val) => {
       dispatch({type: 'DELETE_TODO', payload: val})
+    },
+    onSetChecked: (key) => {
+      dispatch({type: 'SET_CHECKED', payload: key})
     }
   })
 )(App)
