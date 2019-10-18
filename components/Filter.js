@@ -15,7 +15,6 @@ export default class Filter extends Component {
 
   queryChange = type => ({target: {value}}) => {
     this.setState({[type]: value});
-    //console.log(this.state);
   }
 
   render(){
@@ -24,16 +23,16 @@ export default class Filter extends Component {
         <h4>Apply filter</h4>  
         <span className='separator'></span>     
         <div>
-          <Input className={'filter-item'}
-               label={'Input text to search for'}
+          <Input className='filter-item'
+               label='Input text to search for'
                change={this.queryChange('text')}/>
-          <Input className={'filter-item'}
-               label={'Select date search from'}
-               type={'date'}
+          <Input className='filter-item'
+               label='Select date search from'
+               type='date'
                change={this.queryChange('dateFrom')}/>
-          <Input className={'filter-item'}
-               label={'Select date search to'}
-               type={'date'}
+          <Input className='filter-item'
+               label='Select date search to'
+               type='date'
                change={this.queryChange('dateTo')}/>
         </div>
         <div></div>
