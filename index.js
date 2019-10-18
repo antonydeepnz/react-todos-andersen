@@ -19,6 +19,7 @@ class App extends Component {
     };
     this.addTodo = this.addTodo.bind(this);
     this.getDataFromLS = this.getDataFromLS.bind(this);
+    this.setDataToLS = this.setDataToLS.bind(this);
   }
 
   componentDidMount(){
@@ -27,13 +28,17 @@ class App extends Component {
 
   addTodo = (value) => {
     const item = {key: generateID(), text:value.text, date: value.date, isComplete: false}
-    this.setState({todos: this.state.todos.concat(value)});
+    this.setState({todos: this.state.todos.concat(item)});
   }
 
   getDataFromLS = () => {
-    for(let item of JSON.parse(localStorage.getItem('todos'))){
+    for(let item of JSON.parse(localStorage.getItem('react-todo'))){
       //todoItemsArray.push(item);
     }
+  }
+
+  setDataToLS = () => {
+    localStorage.setItem('react-todo', JSON.stringify(this.state));
   }
 
   render() {
