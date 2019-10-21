@@ -65,7 +65,7 @@ class App extends Component {
                       text={item.text}
                       date={item.date}
                       checked={item.isComplete}
-                      setChecked={(event) => {this.setChecked.apply(this,[item.key])}}
+                      setChecked={this.setChecked.bind(this)}
                       deleteItem={(event) => {this.deleteTodo.apply(this,[item.key,event])}} /> 
           })}
         </ul>

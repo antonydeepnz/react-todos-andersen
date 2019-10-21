@@ -20,8 +20,14 @@ export default function todos(state = initialState(), action){
       return newState;
       break;
     case "SET_CHECKED":
-      console.log(action.payload);
-      /const newState = state.filter(item => item.key !== action.payload);
+      const newState = state.slice();
+      const index = newState.findIndex(item => item.key === action.payload);
+      if(index !== -1){
+        newState[index].isComplete = !newState[index].isComplete; 
+      }
+      localStorage.setItem('react-todo', JSON.stringify(newState));
+      console.log(index)
+      return newState;
       break;  
   }
   return state

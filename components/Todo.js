@@ -15,13 +15,20 @@ export default class Todo extends Component {
     this.setState({checked: this.props.checked})
   }
 
+  componentwillReceiveProps(nextProps) {
+    if (this.props.checked !== nextProps.checked) {
+      this.setState({checked: nexProps.checked});
+    }
+  }
+
+
   classNameChange = (normal, changed) => {
     return !this.state.checked? normal: changed;
   } 
 
   markComplete = () => {
     //this.setState({checked: !this.state.checked});
-    //this.props.setChecked(key)
+    this.props.setChecked(key)
   }
 
   render(){
