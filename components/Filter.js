@@ -36,8 +36,8 @@ export default class Filter extends Component {
                change={this.queryChange('dateTo')}/>
         </div>
         <div className='filter-buttons'>
-          <a onClick={()=>{}}>Filter</a>
-          <a onClick={this.props}>Clear</a> 
+          <a onClick={() => {this.props.setFilter(this.state)}}>Filter</a>
+          <a onClick={this.props.clear}>Clear</a> 
         </div>
       </div>
     );

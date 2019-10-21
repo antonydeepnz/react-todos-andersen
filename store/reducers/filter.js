@@ -1,7 +1,7 @@
 const initialState = {
   text: '',
-  dateFrom: '',
-  dateTo: ''
+  dateFrom: '2000-01-01',
+  dateTo: '2050-12-31'
 }
 
 export default function filtered(state = initialState, action){
@@ -13,7 +13,8 @@ export default function filtered(state = initialState, action){
         text: data.text,
         dateFrom: data.dateFrom,
         dateTo: data.dateTo
-      } 
+      }
+      //const newState = state;
       return newState;
     }
     case "CLEAR": {

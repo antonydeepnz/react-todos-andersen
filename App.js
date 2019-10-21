@@ -45,11 +45,25 @@ class App extends Component {
     dataset.dir == 'true'? dataset.dir = 'false': dataset.dir = 'true';  
   }
 
+  setFilter = () => {
+    const data = {
+      text: '' || '',
+      dateFrom: '2019-10-01',
+      dateTo: '2019-12-31'
+    }
+    this.props.onSetFilter(data);
+  }
+
+  clearFilter = () => {
+    this.props.onClear();
+  }
+
   render() {
     return (
       <div>
         <NewTodo addTodo={this.addTodo.bind(this)}/>
-        <Filter />
+        <Filter setFilter={this.setFilter.bind(this)}
+                clear={this.clearFilter.bind(this)}/>
         <div className='sort-list'>
           <Sort title='Sort By Text'
                 func={this.sortByText.bind(this)}/> 
@@ -73,7 +87,10 @@ class App extends Component {
 
 export default connect(
   state => ({
-    todos: state.todos,
+    todos: state.todos.filter(item => {
+    return new Date(item.date) >= new Date(state.filter.dateFrom) &&
+           new Date(item.date) <= new Date(state.filter.dateTo);
+  }),
     filtered: state.filtered
   }),
   dispatch => ({
@@ -92,8 +109,8 @@ export default connect(
     onSortByDate: (dir) => {
       dispatch({type: 'SORT_BY_DATE',  payload: dir})
     },
-    onSetFilter: () => {
-      dispatch({type: 'FILTER'})
+    onSetFilter: (data) => {
+      dispatch({type: 'FILTER', payload: data})
     },
     onClear: () => {
       dispatch({type: 'CLEAR'})
