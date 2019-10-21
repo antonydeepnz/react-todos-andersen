@@ -45,12 +45,7 @@ class App extends Component {
     dataset.dir == 'true'? dataset.dir = 'false': dataset.dir = 'true';  
   }
 
-  setFilter = () => {
-    const data = {
-      text: '' || '',
-      dateFrom: '2019-10-01',
-      dateTo: '2019-12-31'
-    }
+  setFilter = (data) => {
     this.props.onSetFilter(data);
   }
 
@@ -88,8 +83,9 @@ class App extends Component {
 export default connect(
   state => ({
     todos: state.todos.filter(item => {
-    return new Date(item.date) >= new Date(state.filter.dateFrom) &&
-           new Date(item.date) <= new Date(state.filter.dateTo);
+    return item.text.toLowerCase().includes(state.filter.text) &&
+        new Date(item.date) >= new Date(state.filter.dateFrom) &&
+        new Date(item.date) <= new Date(state.filter.dateTo);
   }),
     filtered: state.filtered
   }),

@@ -8,18 +8,26 @@ export default function filtered(state = initialState, action){
   switch (action.type){
     case "FILTER": {
       const data = action.payload;
-      console.log(data);
+      data.dateFrom === ''? data.dateFrom = '2000-01-01': data.dateFrom;
+      data.dateTo === ''? data.dateTo = '2050-12-31': data.dateTo;
       const newState = {
         text: data.text,
         dateFrom: data.dateFrom,
         dateTo: data.dateTo
       }
-      //const newState = state;
       return newState;
-    }
+      break;
+    }/*
+    case "LIVE_SEARCH": {
+      const text = action.payload;
+      const newState = {
+        text: ''
+      }
+    }*/
     case "CLEAR": {
       const newState = initialState;
       return newState;
+      break;
     }
   }
   return state
