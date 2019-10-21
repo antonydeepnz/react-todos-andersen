@@ -22,3 +22,22 @@
   background-color: grey;
   margin-bottom: 15px; 
 }
+
+.filter-buttons {
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+}
+
+.filter-buttons > a {
+  border-radius: 5px;
+  color: white; 
+  padding: 5px 10px;
+  background: rgb(219, 45, 45);
+  box-shadow: 0 -3px rgb(194, 54, 54) inset;
+  transition: 0.2s;
+}
+
+.filter-buttons > a:hover {
+    background: rgb(194, 54, 54)
+}

@@ -35,7 +35,10 @@ export default class Filter extends Component {
                type='date'
                change={this.queryChange('dateTo')}/>
         </div>
-        <div></div>
+        <div className='filter-buttons'>
+          <a onClick={()=>{}}>Filter</a>
+          <a onClick={this.props}>Clear</a> 
+        </div>
       </div>
     );
   }
