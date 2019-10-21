@@ -26,7 +26,6 @@ export default function todos(state = initialState(), action){
         newState[index].isComplete = !newState[index].isComplete; 
       }
       localStorage.setItem('react-todo', JSON.stringify(newState));
-      console.log(index)
       return newState;
       break;  
   }

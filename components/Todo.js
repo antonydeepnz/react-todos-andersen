@@ -1,7 +1,35 @@
 import React, { Component } from 'react';
 import '../styles/todo'
 
-export default class Todo extends Component {
+const Todo = (props) => {
+  return(
+    <li className={!props.checked? 'todo-item':'todo-item todo-item-complete'} >
+      <div className='todo-text-wrapper'
+            onClick={props.setChecked}>
+        <Text text={props.text} />
+        <Date date={props.date} />
+      </div>
+      <Delete click={props.deleteItem} />
+    </li>
+  );
+}
+ 
+export default Todo;
+
+const Text = (props) => {
+  return <p className="todo-item-text">{props.text}</p>
+} 
+
+const Date = (props) => {
+  return <p className="todo-item-date">{props.date}</p>
+}
+
+const Delete = (props) => {
+  return <span className="todo-item-delete" onClick={props.click}></span>
+}
+
+/*
+ class Todo extends Component {
   constructor(){
     super();
     this.state = {
@@ -15,27 +43,21 @@ export default class Todo extends Component {
     this.setState({checked: this.props.checked})
   }
 
-  componentwillReceiveProps(nextProps) {
-    if (this.props.checked !== nextProps.checked) {
-      this.setState({checked: nexProps.checked});
-    }
-  }
-
-
   classNameChange = (normal, changed) => {
     return !this.state.checked? normal: changed;
   } 
 
   markComplete = () => {
-    //this.setState({checked: !this.state.checked});
-    this.props.setChecked(key)
+    this.props.setChecked;
+    console.log(this.props);
+    this.setState({checked: !this.state.checked});
   }
 
   render(){
     return(
       <li className={this.classNameChange('todo-item', 'todo-item todo-item-complete')} >
         <div className='todo-text-wrapper'
-             onClick={this.props.setChecked}>
+             onClick={this.markComplete.bind(this)}>
           <Text text={this.props.text} />
           <Date date={this.props.date} />
         </div>
@@ -44,16 +66,4 @@ export default class Todo extends Component {
     );
   }
 }
-
-
-const Text = (props) => {
-  return <p className="todo-item-text">{props.text}</p>
-} 
-
-const Date = (props) => {
-  return <p className="todo-item-date">{props.date}</p>
-}
-
-const Delete = (props) => {
-  return <span className="todo-item-delete" onClick={props.click}></span>
-}
+*/

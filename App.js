@@ -14,37 +14,13 @@ const generateID = function () {
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      todos: []
-    };
-    //this.addTodo = this.addTodo.bind(this);
-    //this.getDataFromLS = this.getDataFromLS.bind(this);
-    //this.setDataToLS = this.setDataToLS.bind(this);
   }
 
-/*
-  addTodo = (value) => {
-    const item = {key: generateID(), text:value.text, date: value.date, isComplete: false}
-    this.setState(prevState => ({todos: [...prevState.todos,item]}));
-    console.log(this.state.todos);
-    this.setDataToLS();
-    console.log(localStorage);
-  }
-*/
   addTodo = (value) => {
     const item = {key: generateID(), text: value.text, date: value.date, isComplete: false};
     this.props.onAddTodo(item);
   }
-/*
-  getDataFromLS = () => {
-    const data = JSON.parse(localStorage.getItem('react-todo'));
-    this.setState({todos: [...data]});
-  }
 
-  setDataToLS = () => {
-    localStorage.setItem('react-todo', JSON.stringify(this.state.todos));
-  }
-*/
   deleteTodo = (key, event) => {
     event.target.parentNode.style.display = 'none';
     this.props.onDeleteTodo(key);
@@ -65,7 +41,7 @@ class App extends Component {
                       text={item.text}
                       date={item.date}
                       checked={item.isComplete}
-                      setChecked={this.setChecked.bind(this)}
+                      setChecked={() => this.setChecked.apply(this,[item.key])}
                       deleteItem={(event) => {this.deleteTodo.apply(this,[item.key,event])}} /> 
           })}
         </ul>
@@ -77,7 +53,7 @@ class App extends Component {
 export default connect(
   state => ({
     todos: state.todos,
-    another: state.another
+    filtered: state.filtered
   }),
   dispatch => ({
     onAddTodo: (todo) => {
