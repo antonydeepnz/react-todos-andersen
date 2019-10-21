@@ -15,11 +15,13 @@ export default function todos(state = initialState(), action){
       return newState;
       break;
     case "DELETE_TODO": 
-      console.log(action.payload);
-
+      const newState = state.filter(item => item.key !== action.payload);
+      localStorage.setItem('react-todo', JSON.stringify(newState));
+      return newState;
       break;
     case "SET_CHECKED":
-      
+      console.log(action.payload);
+      /const newState = state.filter(item => item.key !== action.payload);
       break;  
   }
   return state

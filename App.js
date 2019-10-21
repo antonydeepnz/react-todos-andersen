@@ -15,8 +15,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      todos: [],
-      filteredTodos: []
+      todos: []
     };
     //this.addTodo = this.addTodo.bind(this);
     //this.getDataFromLS = this.getDataFromLS.bind(this);
@@ -34,7 +33,7 @@ class App extends Component {
 */
   addTodo = (value) => {
     const item = {key: generateID(), text: value.text, date: value.date, isComplete: false};
-    this.props.onAddTodo(value);
+    this.props.onAddTodo(item);
   }
 /*
   getDataFromLS = () => {
@@ -46,24 +45,28 @@ class App extends Component {
     localStorage.setItem('react-todo', JSON.stringify(this.state.todos));
   }
 */
-  deleteTodo = (event) => {
+  deleteTodo = (key, event) => {
     event.target.parentNode.style.display = 'none';
-    this.props.onDeleteTodo('dsfdsfdf');
+    this.props.onDeleteTodo(key);
+  }
+
+  setChecked = (key) => {
+    this.props.onSetChecked(key);
   }
 
   render() {
-    console.log(this.props.another)
     return (
       <div>
         <NewTodo addTodo={this.addTodo.bind(this)}/>
         <Filter />
         <ul className='todos-list'>
-          {this.props.todos.map((item) => {
+          {this.props.todos.map((item,index) => {
             return <Todo key={item.key}
                       text={item.text}
                       date={item.date}
                       checked={item.isComplete}
-                      deleteItem={this.deleteTodo.bind(this)} /> 
+                      setChecked={(event) => {this.setChecked.apply(this,[item.key])}}
+                      deleteItem={(event) => {this.deleteTodo.apply(this,[item.key,event])}} /> 
           })}
         </ul>
       </div>
@@ -80,11 +83,12 @@ export default connect(
     onAddTodo: (todo) => {
       dispatch({type: 'ADD_TODO', payload: todo})
     },
-    onDeleteTodo: (val) => {
-      dispatch({type: 'DELETE_TODO', payload: val})
+    onDeleteTodo: (key) => {
+      dispatch({type: 'DELETE_TODO', payload: key})
     },
     onSetChecked: (key) => {
       dispatch({type: 'SET_CHECKED', payload: key})
     }
   })
 )(App)
+

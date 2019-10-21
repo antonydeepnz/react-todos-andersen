@@ -7,39 +7,28 @@ export default class Todo extends Component {
     this.state = {
       checked: false
     }
-    //this.deleteItem = this.deleteItem.bind(this);
     this.markComplete = this.markComplete.bind(this);
     this.classNameChange = this.classNameChange.bind(this);
-    this.getCheckedState = this.getCheckedState.bind(this);
   }
 
   componentDidMount(){
     this.setState({checked: this.props.checked})
   }
-/*
-  deleteItem = (event) => {
-    event.target.parentNode.style.display = 'none';
 
-  }
-*/
   classNameChange = (normal, changed) => {
     return !this.state.checked? normal: changed;
   } 
 
   markComplete = () => {
-    this.setState({checked: !this.state.checked});
-  }
-
-  getCheckedState = (event) => {
-    //console.log(event.target.getAttribute('data-key'));
+    //this.setState({checked: !this.state.checked});
+    //this.props.setChecked(key)
   }
 
   render(){
     return(
-      <li className={this.classNameChange('todo-item', 'todo-item todo-item-complete')}
-          onClick={this.markComplete}
-          onMouseEnter={this.getCheckedState.bind(this)}>
-        <div className='todo-text-wrapper'>
+      <li className={this.classNameChange('todo-item', 'todo-item todo-item-complete')} >
+        <div className='todo-text-wrapper'
+             onClick={this.props.setChecked}>
           <Text text={this.props.text} />
           <Date date={this.props.date} />
         </div>
