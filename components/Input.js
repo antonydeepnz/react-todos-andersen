@@ -4,7 +4,9 @@ const Input = (props) => {
   return (
     <div className={props.className}>
       {props.label && <label>{props.label}</label>}
-      <input type={props.type} onChange={props.change}/>
+      <input type={props.type}
+             onChange={props.change}
+             ref={props.inputRef}/>
     </div>
   );
 }
