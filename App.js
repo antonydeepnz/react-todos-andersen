@@ -89,7 +89,7 @@ export default connect(
         new Date(item.date) >= new Date(state.filter.dateFrom) &&
         new Date(item.date) <= new Date(state.filter.dateTo);
   }),
-    filtered: state.filtered
+
   }),
   dispatch => ({
     onAddTodo: (todo) => {
