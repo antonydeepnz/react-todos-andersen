@@ -5,8 +5,6 @@ import Input from './Input'
 export default class NewTodo extends Component {
   constructor(){
     super();
-   // this.textRef = React.createRef();
-   // this.dateRef = React.createRef();
     this.state = {
       text: '',
       date: ''

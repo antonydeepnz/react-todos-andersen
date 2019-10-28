@@ -5,25 +5,25 @@ export const addTodo = (todo) => ({
 
 export const deleteTodo = (key) => ({
   type: 'DELETE_TODO',
-  key
+  payload: key
 })
 
 export const setChecked = (key) => ({
   type: 'SET_CHECKED',
-  key
+  payload: key
 })
 
 export const sortByText = (direction) => ({
   type: 'SORT_BY_TEXT',
-  direction
+  payload: direction
 })
 
 export const sortByDate = (direction) => ({
   type: 'SORT_BY_DATE',
-  direction
+  payload: direction
 })
 
-export const setFilter = ({}) => ({
+export const setFilter = (filterData) => ({
   type: 'SET_FILTER',
-  direction
+  payload: filterData
 })

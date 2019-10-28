@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './style.css';
-import defaultData from './defaultData'
 import Todo from './components/Todo'
-import Filter from './components/Filter'
+//import Filter from './components/Filter'
+import Filter from './components/Filter1'
 import NewTodo from './components/NewTodo'
 import Sort from './components/Sort'
 import * as todoActions from './store/actions/todoActions'
+import * as filterActions from './store/actions/filterActions'
 
 import { connect } from 'react-redux'
 
@@ -51,12 +52,12 @@ class App extends Component {
     this.props.onSortByText(direction);
   }
 
-  SortByDate = (direction) => {
+  sortByDate = (direction) => {
     this.props.onSortByDate(direction);
   }
 
-  setFilter = (data) => {
-    this.props.onSetFilter(data);
+  setFilter = (filterData) => {
+    this.props.onSetFilter(filterDat);
   }
 
   clearFilter = () => {
@@ -73,7 +74,7 @@ class App extends Component {
           <Sort title='Sort By Text'
                 func={this.sortByText}/> 
           <Sort title='Sort By Date'
-                func={this.SortByDate}/>       
+                func={this.sortByDate}/>       
         </div>
         <ul className='todos-list'>
           {this.fillListWithData()}
@@ -103,8 +104,8 @@ export default connect(
     onSortByDate: (direction) => {
       dispatch(todoActions.sortByDate(direction))
     },
-    onSetFilter: (data) => {
-      dispatch({type: 'FILTER', payload: data})
+    onSetFilter: (filterData) => {
+      dispatch(todoActions.setFilter(filterData))
     },
     onClear: () => {
       dispatch({type: 'CLEAR'})
