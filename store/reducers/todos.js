@@ -7,8 +7,8 @@ const initialState = () => {
 } 
 
 
-export default function todos(state = initialState(), action){
-  switch (action.type){
+export default function todos(state = initialState(), actions){
+  switch (actions.type){
     case "ADD_TODO": {
       const newState = [...state, action.payload];
       localStorage.setItem('react-todo', JSON.stringify(newState));
@@ -62,7 +62,14 @@ export default function todos(state = initialState(), action){
         })
       }
       return newState;
-    }    
+    }
+    case "SET_FILTER": {
+      return state.filter(item => {
+        return item.text.toLowerCase().includes(state.filter.text) &&
+          new Date(item.date) >= new Date(state.filter.dateFrom) &&
+          new Date(item.date) <= new Date(state.filter.dateTo);
+      })
+    }     
   }
   return state
 }

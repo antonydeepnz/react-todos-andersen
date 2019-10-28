@@ -22,3 +22,8 @@ export const sortByDate = (direction) => ({
   type: 'SORT_BY_DATE',
   direction
 })
+
+export const setFilter = ({}) => ({
+  type: 'SET_FILTER',
+  direction
+})

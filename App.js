@@ -5,6 +5,7 @@ import Todo from './components/Todo'
 import Filter from './components/Filter'
 import NewTodo from './components/NewTodo'
 import Sort from './components/Sort'
+import * as todoActions from './store/actions/todoActions'
 
 import { connect } from 'react-redux'
 
@@ -34,7 +35,7 @@ class App extends Component {
         text: value.text, 
         date: value.date, 
         isComplete: false};
-    this.props.onAddTodo(item);
+    todoActions.addTodo(item);
   }
 
   deleteTodo = (key, event) => {
@@ -84,29 +85,24 @@ class App extends Component {
 
 export default connect(
   state => ({
-    todos: state.todos.filter(item => {
-    return item.text.toLowerCase().includes(state.filter.text) &&
-        new Date(item.date) >= new Date(state.filter.dateFrom) &&
-        new Date(item.date) <= new Date(state.filter.dateTo);
-  }),
-
+    todos: state.todos
   }),
   dispatch => ({
-    onAddTodo: (todo) => {
-      dispatch({type: 'ADD_TODO', payload: todo})
-    },
-    onDeleteTodo: (key) => {
-      dispatch({type: 'DELETE_TODO', payload: key})
-    },
-    onSetChecked: (key) => {
-      dispatch({type: 'SET_CHECKED', payload: key})
-    },
-    onSortByText: (dir) => {
-      dispatch({type: 'SORT_BY_TEXT', payload: dir})
-    },
-    onSortByDate: (dir) => {
-      dispatch({type: 'SORT_BY_DATE',  payload: dir})
-    },
+    // onAddTodo: (todo) => {
+    //   dispatch({type: 'ADD_TODO', payload: todo})
+    // },
+    // onDeleteTodo: (key) => {
+    //   dispatch({type: 'DELETE_TODO', payload: key})
+    // },
+    // onSetChecked: (key) => {
+    //   dispatch({type: 'SET_CHECKED', payload: key})
+    // },
+    // onSortByText: (dir) => {
+    //   dispatch({type: 'SORT_BY_TEXT', payload: dir})
+    // },
+    // onSortByDate: (dir) => {
+    //   dispatch({type: 'SORT_BY_DATE',  payload: dir})
+    // },
     onSetFilter: (data) => {
       dispatch({type: 'FILTER', payload: data})
     },
