@@ -1,45 +1,51 @@
-import React, { Component } from 'react';
+import React, { useRef } from 'react';
 import '../styles/filter'
 import Input from './Input'
 
-export default class Filter extends Component {
-  constructor(){
-    super();
-    this.state = {
-      text: '',
-      dateFrom: '',
-      dateTo: ''
+const Filter = (props) => {
+  const textRef = useRef(null);
+  const dateFromRef = useRef(null);
+  const dateToRef = useRef(null);
+
+  const click = () => {
+    const filterData = {
+      text: textRef.current.value,
+      dateFrom: dateFromRef.current.value,
+      dateTo: dateToRef.current.value 
     }
-    this.queryChange = this.queryChange.bind(this);
+    props.setFilter(filterData);
   }
 
-  queryChange = type => ({target: {value}}) => {
-    this.setState({[type]: value});
+  const clear = () => {
+    textRef.current.value = '';
+    dateFromRef.current.value = '';
+    dateToRef.current.value = '';
+    //props.setFilter(this.state);
   }
 
-  render(){
-    return(
-      <div className="filter-container">
+  return (
+    <div className="filter-container">
         <h4>Apply filter</h4>  
         <span className='separator'></span>     
         <div>
           <Input className='filter-item'
                label='Input text to search for'
-               change={this.queryChange('text')}/>
+               inputRef={textRef} />
           <Input className='filter-item'
                label='Select date search from'
                type='date'
-               change={this.queryChange('dateFrom')}/>
+               inputRef={dateFromRef} />
           <Input className='filter-item'
                label='Select date search to'
                type='date'
-               change={this.queryChange('dateTo')}/>
+               inputRef={dateToRef} />
         </div>
         <div className='filter-buttons'>
-          <a onClick={() => {this.props.setFilter(this.state)}}>Filter</a>
-          <a onClick={this.props.clear}>Clear</a> 
+          <a onClick={click}>Filter</a>
+          <a onClick={props.clear}>Clear</a> 
         </div>
       </div>
-    );
-  }
-}//
+  ); 
+}
+
+export default Filter;

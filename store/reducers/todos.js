@@ -64,10 +64,16 @@ export default function todos(state = initialState(), action){
       return newState;
     }
     case "SET_FILTER": {
-      return state.filter(item => {
-        return item.text.toLowerCase().includes(state.filter.text) &&
-          new Date(item.date) >= new Date(state.filter.dateFrom) &&
-          new Date(item.date) <= new Date(state.filter.dateTo);
+      const filterData = action.payload;
+      data.dateFrom === ''? data.dateFrom = '2000-01-01': data.dateFrom;
+      data.dateTo === ''? data.dateTo = '2050-12-31': data.dateTo;
+
+      const newState = initialState();
+
+      return newState.filter(item => {
+        return item.text.toLowerCase().includes(filterData.text) ||
+          new Date(item.date) >= new Date(filterData.dateFrom) &&
+          new Date(item.date) <= new Date(filterData.dateTo);
       })
     }     
   }

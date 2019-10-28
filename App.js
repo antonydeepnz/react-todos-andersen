@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './style.css';
 import Todo from './components/Todo'
-//import Filter from './components/Filter'
-import Filter from './components/Filter1'
+import Filter from './components/Filter'
 import NewTodo from './components/NewTodo'
 import Sort from './components/Sort'
 import * as todoActions from './store/actions/todoActions'
-import * as filterActions from './store/actions/filterActions'
 
 import { connect } from 'react-redux'
 
@@ -57,7 +55,7 @@ class App extends Component {
   }
 
   setFilter = (filterData) => {
-    this.props.onSetFilter(filterDat);
+    this.props.onSetFilter(filterData);
   }
 
   clearFilter = () => {
