@@ -17,13 +17,7 @@ export default function filtered(state = initialState, action){
       }
       return newState;
       break;
-    }/*
-    case "LIVE_SEARCH": {
-      const text = action.payload;
-      const newState = {
-        text: ''
-      }
-    }*/
+    }
     case "CLEAR": {
       const newState = initialState;
       return newState;

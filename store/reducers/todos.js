@@ -34,7 +34,7 @@ export default function todos(state = initialState(), action){
     case "SORT_BY_TEXT": {
       const direction = action.payload;
       const newState = state.slice();
-      if(direction == 'true'){
+      if(direction === true){
         newState.sort((a,b) => {
           if(a.text.toLowerCase() < b.text.toLowerCase()) { return -1; }
           if(a.text.toLowerCase() > b.text.toLowerCase()) { return 1; }
@@ -43,8 +43,8 @@ export default function todos(state = initialState(), action){
         
       } else 
         newState.sort((a,b) => {
-            if(a.text > b.text) { return -1; }
-            if(a.text < b.text) { return 1; }
+            if(a.text.toLowerCase() > b.text.toLowerCase()) { return -1; }
+            if(a.text.toLowerCase() < b.text.toLowerCase()) { return 1; }
             return 0;
           })
       return newState;
@@ -52,7 +52,7 @@ export default function todos(state = initialState(), action){
     case "SORT_BY_DATE": {
       const direction = action.payload;
       const newState = state.slice();
-      if(direction == 'true'){
+      if(direction === true){
         newState.sort((a,b) => {
           return new Date(a.date) - new Date(b.date)
         })

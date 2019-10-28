@@ -17,6 +17,17 @@ class App extends Component {
     super();
   }
 
+  fillListWithData = () => {
+    return this.props.todos.map((item,index) => {
+            return <Todo key={item.key}
+                      text={item.text}
+                      date={item.date}
+                      checked={item.isComplete}
+                      setChecked={() => this.setChecked.apply(this,[item.key])}
+                      deleteItem={(event) => {this.deleteTodo.apply(this,[item.key,event])}} /> 
+          })
+  }
+
   addTodo = (value) => {
     const item = {
         key: generateID(), 
@@ -35,14 +46,12 @@ class App extends Component {
     this.props.onSetChecked(key);
   }
 
-  sortByText = ({target:{dataset}}) => {
-    this.props.onSortByText(dataset.dir);
-    dataset.dir == 'true'? dataset.dir = 'false': dataset.dir = 'true';  
+  sortByText = (direction) => {
+    this.props.onSortByText(direction);
   }
 
-  SortByDate = ({target:{dataset}}) => {
-    this.props.onSortByDate(dataset.dir);
-    dataset.dir == 'true'? dataset.dir = 'false': dataset.dir = 'true';  
+  SortByDate = (direction) => {
+    this.props.onSortByDate(direction);
   }
 
   setFilter = (data) => {
@@ -56,24 +65,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NewTodo addTodo={this.addTodo.bind(this)}/>
-        <Filter setFilter={this.setFilter.bind(this)}
-                clear={this.clearFilter.bind(this)}/>
+        <NewTodo addTodo={this.addTodo}/>
+        <Filter setFilter={this.setFilter}
+                clear={this.clearFilter}/>
         <div className='sort-list'>
           <Sort title='Sort By Text'
-                func={this.sortByText.bind(this)}/> 
+                func={this.sortByText}/> 
           <Sort title='Sort By Date'
-                func={this.SortByDate.bind(this)}/>       
+                func={this.SortByDate}/>       
         </div>
         <ul className='todos-list'>
-          {this.props.todos.map((item,index) => {
-            return <Todo key={item.key}
-                      text={item.text}
-                      date={item.date}
-                      checked={item.isComplete}
-                      setChecked={() => this.setChecked.apply(this,[item.key])}
-                      deleteItem={(event) => {this.deleteTodo.apply(this,[item.key,event])}} /> 
-          })}
+          {this.fillListWithData()}
         </ul>
       </div>
     );
