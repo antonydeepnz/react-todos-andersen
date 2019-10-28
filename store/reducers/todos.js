@@ -7,8 +7,8 @@ const initialState = () => {
 } 
 
 
-export default function todos(state = initialState(), actions){
-  switch (actions.type){
+export default function todos(state = initialState(), action){
+  switch (action.type){
     case "ADD_TODO": {
       const newState = [...state, action.payload];
       localStorage.setItem('react-todo', JSON.stringify(newState));

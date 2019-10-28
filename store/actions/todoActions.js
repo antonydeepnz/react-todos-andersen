@@ -1,6 +1,6 @@
 export const addTodo = (todo) => ({
   type: 'ADD_TODO',
-  todo
+  payload: todo
 })
 
 export const deleteTodo = (key) => ({

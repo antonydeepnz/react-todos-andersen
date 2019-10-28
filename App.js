@@ -35,7 +35,7 @@ class App extends Component {
         text: value.text, 
         date: value.date, 
         isComplete: false};
-    todoActions.addTodo(item);
+    this.props.onAddTodo(item);
   }
 
   deleteTodo = (key, event) => {
@@ -88,21 +88,21 @@ export default connect(
     todos: state.todos
   }),
   dispatch => ({
-    // onAddTodo: (todo) => {
-    //   dispatch({type: 'ADD_TODO', payload: todo})
-    // },
-    // onDeleteTodo: (key) => {
-    //   dispatch({type: 'DELETE_TODO', payload: key})
-    // },
-    // onSetChecked: (key) => {
-    //   dispatch({type: 'SET_CHECKED', payload: key})
-    // },
-    // onSortByText: (dir) => {
-    //   dispatch({type: 'SORT_BY_TEXT', payload: dir})
-    // },
-    // onSortByDate: (dir) => {
-    //   dispatch({type: 'SORT_BY_DATE',  payload: dir})
-    // },
+    onAddTodo: (todo) => {
+      dispatch(todoActions.addTodo(todo))
+    },
+    onDeleteTodo: (key) => {
+      dispatch(todoActions.deleteTodo(key))
+    },
+    onSetChecked: (key) => {
+      dispatch(todoActions.setChecked(key))
+    },
+    onSortByText: (direction) => {
+      dispatch(todoActions.sortByText(direction))
+    },
+    onSortByDate: (direction) => {
+      dispatch(todoActions.sortByDate(direction))
+    },
     onSetFilter: (data) => {
       dispatch({type: 'FILTER', payload: data})
     },
