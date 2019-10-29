@@ -1,23 +1,22 @@
 import defaultData from './defaultData'
+import * as LS from '../../src/localStorageFuncs'
 
-const data = JSON.parse(localStorage.getItem('react-todo'));  
+const rawData = LS.loadState();
+const data = rawData.todos;  
 
 const initialState = () => {
   return data? [...data]: [...defaultData];
 } 
 
-
 export default function todos(state = initialState(), action){
   switch (action.type){
     case "ADD_TODO": {
       const newState = [...state, action.payload];
-      localStorage.setItem('react-todo', JSON.stringify(newState));
       return newState;
       break;
     }
     case "DELETE_TODO": {
       const newState = state.filter(item => item.key !== action.payload);
-      localStorage.setItem('react-todo', JSON.stringify(newState));
       return newState;
       break;
     }
@@ -27,7 +26,6 @@ export default function todos(state = initialState(), action){
       if(index !== -1){
         newState[index].isComplete = !newState[index].isComplete; 
       }
-      localStorage.setItem('react-todo', JSON.stringify(newState));
       return newState;
       break;
     }
@@ -63,19 +61,6 @@ export default function todos(state = initialState(), action){
       }
       return newState;
     }
-    /*case "SET_FILTER": {
-      const filterData = action.payload;
-      data.dateFrom === ''? data.dateFrom = '2000-01-01': data.dateFrom;
-      data.dateTo === ''? data.dateTo = '2050-12-31': data.dateTo;
-
-      const newState = initialState();
-
-      return newState.filter(item => {
-        return item.text.toLowerCase().includes(filterData.text) ||
-          new Date(item.date) >= new Date(filterData.dateFrom) &&
-          new Date(item.date) <= new Date(filterData.dateTo);
-      })
-    }  */   
   }
   return state
 }
