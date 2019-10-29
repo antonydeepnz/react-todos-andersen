@@ -22,8 +22,3 @@ export const sortByDate = (direction) => ({
   type: 'SORT_BY_DATE',
   payload: direction
 })
-
-export const setFilter = (filterData) => ({
-  type: 'SET_FILTER',
-  payload: filterData
-})

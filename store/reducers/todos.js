@@ -63,7 +63,7 @@ export default function todos(state = initialState(), action){
       }
       return newState;
     }
-    case "SET_FILTER": {
+    /*case "SET_FILTER": {
       const filterData = action.payload;
       data.dateFrom === ''? data.dateFrom = '2000-01-01': data.dateFrom;
       data.dateTo === ''? data.dateTo = '2050-12-31': data.dateTo;
@@ -75,7 +75,7 @@ export default function todos(state = initialState(), action){
           new Date(item.date) >= new Date(filterData.dateFrom) &&
           new Date(item.date) <= new Date(filterData.dateTo);
       })
-    }     
+    }  */   
   }
   return state
 }

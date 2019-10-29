@@ -5,6 +5,7 @@ import Filter from './components/Filter'
 import NewTodo from './components/NewTodo'
 import Sort from './components/Sort'
 import * as todoActions from './store/actions/todoActions'
+import * as filterActions from './store/actions/filterActions'
 
 import { connect } from 'react-redux'
 
@@ -18,14 +19,20 @@ class App extends Component {
   }
 
   fillListWithData = () => {
-    return this.props.todos.map((item,index) => {
+    const todos = this.props.todos;
+    const filter = this.props.filter;
+    const filtered = this.props.todos.filter(item => {
+        return item.text.toLowerCase().includes(filter.text) &&
+          new Date(item.date) >= new Date(filter.dateFrom) &&
+          new Date(item.date) <= new Date(filter.dateTo)});
+    return filtered.map((item,index) => {
             return <Todo key={item.key}
                       text={item.text}
                       date={item.date}
                       checked={item.isComplete}
                       setChecked={() => this.setChecked.apply(this,[item.key])}
                       deleteItem={(event) => {this.deleteTodo.apply(this,[item.key,event])}} /> 
-          })
+      })
   }
 
   addTodo = (value) => {
@@ -84,7 +91,8 @@ class App extends Component {
 
 export default connect(
   state => ({
-    todos: state.todos
+    todos: state.todos,
+    filter: state.filter
   }),
   dispatch => ({
     onAddTodo: (todo) => {
@@ -102,10 +110,10 @@ export default connect(
     onSortByDate: (direction) => {
       dispatch(todoActions.sortByDate(direction))
     },
-    onSetFilter: (filterData) => {
-      dispatch(todoActions.setFilter(filterData))
+    onSetFilter: (state, filterData) => {
+      dispatch(filterActions.setFilter(state, filterData))
     },
     onClear: () => {
-      dispatch({type: 'CLEAR'})
+      dispatch(filterActions.clearFilter())
     }
 }))(App)
