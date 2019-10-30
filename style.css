@@ -1,3 +1,10 @@
 h1, p {
   font-family: Lato;
 }
+
+.todos-list {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 80%;
+}

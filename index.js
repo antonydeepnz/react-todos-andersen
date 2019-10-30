@@ -1,22 +1,14 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import './style.css';
+import { Provider } from 'react-redux'
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      todos: []
-    };
-  }
+import store from './store/store'
 
-  render() {
-    return (
-      <div>
-        
-      </div>
-    );
-  }
-}
+import App from './App'
 
-render(<App />, document.getElementById('root'));
+
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>, document.getElementById('root'));
